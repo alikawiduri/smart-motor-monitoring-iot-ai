@@ -1,0 +1,926 @@
+[
+    {
+        "id": "76fadeb220138296",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ca0daf5b68acc88f",
+        "type": "debug",
+        "z": "76fadeb220138296",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "43862e1538a7ae3f",
+        "type": "mqtt in",
+        "z": "76fadeb220138296",
+        "name": "",
+        "topic": "alika2026/iot/motor1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b079dc9948cd9f35",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "ca0daf5b68acc88f",
+                "e7ff79dc2bb2d515"
+            ]
+        ]
+    },
+    {
+        "id": "e7ff79dc2bb2d515",
+        "type": "json",
+        "z": "76fadeb220138296",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 370,
+        "y": 640,
+        "wires": [
+            [
+                "6e9b8b44cb4778e2",
+                "79ae89e591f045bd",
+                "d89f502855f0feb8",
+                "2bf51469c756af1b",
+                "d19adb35f0a0e921",
+                "0f79f03314386c7d",
+                "1ab188f7256e4182",
+                "9da3a8967bafe7b1",
+                "4daf6cce69513ff6",
+                "e779938db8b22f5d"
+            ]
+        ]
+    },
+    {
+        "id": "600d3882aee1a165",
+        "type": "ui_gauge",
+        "z": "76fadeb220138296",
+        "name": "",
+        "group": "aa290a323c2755e0",
+        "order": 0,
+        "width": "6",
+        "height": "5",
+        "gtype": "gage",
+        "title": "Temp",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 830,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9f60df6eb6d2c384",
+        "type": "ui_gauge",
+        "z": "76fadeb220138296",
+        "name": "",
+        "group": "aa290a323c2755e0",
+        "order": 1,
+        "width": "6",
+        "height": "5",
+        "gtype": "gage",
+        "title": " Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "14f2ce7770bcb71c",
+        "type": "ui_gauge",
+        "z": "76fadeb220138296",
+        "name": "",
+        "group": "aa290a323c2755e0",
+        "order": 2,
+        "width": "6",
+        "height": "5",
+        "gtype": "gage",
+        "title": "Vibration",
+        "label": "ADC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "4095",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "04e5a4603998dfa7",
+        "type": "ui_gauge",
+        "z": "76fadeb220138296",
+        "name": "",
+        "group": "aa290a323c2755e0",
+        "order": 3,
+        "width": "6",
+        "height": "5",
+        "gtype": "gage",
+        "title": "Current",
+        "label": "A",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "10",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "6e9b8b44cb4778e2",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Function1",
+        "func": "let data = JSON.parse(msg.payload);\n\nmsg.topic = \"Temperature\";\nmsg.payload = data.temperature;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 200,
+        "wires": [
+            [
+                "600d3882aee1a165",
+                "43a1717c6568ba1f"
+            ]
+        ]
+    },
+    {
+        "id": "79ae89e591f045bd",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Function2",
+        "func": "let data = JSON.parse(msg.payload);\n\nmsg.topic = \"Humidity\";\nmsg.payload = data.humidity;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 360,
+        "wires": [
+            [
+                "9f60df6eb6d2c384",
+                "43a1717c6568ba1f"
+            ]
+        ]
+    },
+    {
+        "id": "d89f502855f0feb8",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Function3",
+        "func": "let data = JSON.parse(msg.payload);\nmsg.payload = data.vibration;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 440,
+        "wires": [
+            [
+                "14f2ce7770bcb71c",
+                "4597e06a80774532"
+            ]
+        ]
+    },
+    {
+        "id": "2bf51469c756af1b",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Function4",
+        "func": "let data = JSON.parse(msg.payload);\nmsg.payload = data.current;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 560,
+        "wires": [
+            [
+                "04e5a4603998dfa7",
+                "a717fdd4d9d82b8c"
+            ]
+        ]
+    },
+    {
+        "id": "d19adb35f0a0e921",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Status",
+        "func": "if (typeof msg.payload === \"string\") {\n    msg.payload = JSON.parse(msg.payload);\n}\n\nvar temp = parseFloat(msg.payload.temperature);\nvar vib = parseFloat(msg.payload.vibration);\n\nif (temp >= 50 || vib >= 3000) {\n    msg.payload = \"FAULT\";\n}\nelse if (temp >= 40 || vib >= 1500) {\n    msg.payload = \"WARNING\";\n}\nelse {\n    msg.payload = \"NORMAL\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 760,
+        "wires": [
+            [
+                "6a687ccd3269f918",
+                "78f8966a17417a38"
+            ]
+        ]
+    },
+    {
+        "id": "6a687ccd3269f918",
+        "type": "debug",
+        "z": "76fadeb220138296",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "43a1717c6568ba1f",
+        "type": "ui_chart",
+        "z": "76fadeb220138296",
+        "name": "",
+        "group": "aa290a323c2755e0",
+        "order": 4,
+        "width": "24",
+        "height": "6",
+        "label": "Temp & Humidity Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 990,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4597e06a80774532",
+        "type": "ui_chart",
+        "z": "76fadeb220138296",
+        "name": "",
+        "group": "aa290a323c2755e0",
+        "order": 5,
+        "width": "12",
+        "height": "5",
+        "label": "Vibration Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 980,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a717fdd4d9d82b8c",
+        "type": "ui_chart",
+        "z": "76fadeb220138296",
+        "name": "",
+        "group": "aa290a323c2755e0",
+        "order": 6,
+        "width": "12",
+        "height": "5",
+        "label": "Current Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 980,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0f79f03314386c7d",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Timestamp",
+        "func": "msg.payload = new Date().toLocaleString();\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 700,
+        "wires": [
+            [
+                "bb9cbbd35bbb248c"
+            ]
+        ]
+    },
+    {
+        "id": "bb9cbbd35bbb248c",
+        "type": "ui_text",
+        "z": "76fadeb220138296",
+        "group": "ad55addac5b7a466",
+        "order": 0,
+        "width": "8",
+        "height": "2",
+        "name": "",
+        "label": "Last Update",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 790,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "1ab188f7256e4182",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Summary",
+        "func": "if (typeof msg.payload === \"string\") {\n    msg.payload = JSON.parse(msg.payload);\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 920,
+        "wires": [
+            [
+                "6faeb2779e68990e"
+            ]
+        ]
+    },
+    {
+        "id": "6faeb2779e68990e",
+        "type": "ui_template",
+        "z": "76fadeb220138296",
+        "group": "19a449d55ddcc520",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<div style=\"padding:10px\">\n  <h3>Motor Summary</h3>\n\n  <p>🌡 Temperature : {{msg.payload.temperature}} °C</p>\n\n  <p>💧 Humidity : {{msg.payload.humidity}} %</p>\n\n  <p>⚡ Current : {{msg.payload.current}} A</p>\n\n  <p>📈 Vibration : {{msg.payload.vibration}}</p>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 760,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "78f8966a17417a38",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Count Function",
+        "func": "let countFault = flow.get('countFault') || 0;\nlet countWarning = flow.get('countWarning') || 0;\n\nif (msg.payload === \"FAULT\") {\n    countFault++;\n}\nelse if (msg.payload === \"WARNING\") {\n    countWarning++;\n}\n\nflow.set('countFault', countFault);\nflow.set('countWarning', countWarning);\n\nmsg.payload =\n    \"Fault Count : \" + countFault +\n    \"<br>Warning Count : \" + countWarning;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 840,
+        "wires": [
+            [
+                "f6ece52a01c90325",
+                "0d4a72bb93bd8ba5",
+                "dc06eea75742bf56"
+            ]
+        ]
+    },
+    {
+        "id": "9da3a8967bafe7b1",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Motor Health",
+        "func": "let data = JSON.parse(msg.payload);\n\nlet score = 100;\n\n// Temperatur\nscore -= (data.temperature / 100) * 30;\n\n// Getaran\nscore -= (data.vibration / 4095) * 40;\n\n// Arus\nscore -= (data.current / 10) * 30;\n\nscore = Math.max(0, Math.round(score));\n\nmsg.payload = score;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 980,
+        "wires": [
+            [
+                "fccdb58d7e4df9d1"
+            ]
+        ]
+    },
+    {
+        "id": "f6ece52a01c90325",
+        "type": "ui_text",
+        "z": "76fadeb220138296",
+        "group": "19a449d55ddcc520",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Statistics",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 980,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "33a0b4b94316b007",
+        "type": "ui_text",
+        "z": "76fadeb220138296",
+        "group": "ad55addac5b7a466",
+        "order": 3,
+        "width": "8",
+        "height": "2",
+        "name": "",
+        "label": "Motor Health",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 990,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "fccdb58d7e4df9d1",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Health Status",
+        "func": "let score = msg.payload;\n\nif (score >= 80)\n    msg.payload = \"🟢 Excellent (\" + score + \")\";\nelse if (score >= 60)\n    msg.payload = \"🟡 Good (\" + score + \")\";\nelse if (score >= 40)\n    msg.payload = \"🟠 Warning (\" + score + \")\";\nelse\n    msg.payload = \"🔴 Critical (\" + score + \")\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 980,
+        "wires": [
+            [
+                "33a0b4b94316b007"
+            ]
+        ]
+    },
+    {
+        "id": "1db48b9c81a792bb",
+        "type": "file",
+        "z": "76fadeb220138296",
+        "name": "",
+        "filename": "C:\\Users\\Alika\\Documents\\motor_dataset.csv",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "utf8",
+        "x": 910,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4daf6cce69513ff6",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Save Dataset",
+        "func": "let d = JSON.parse(msg.payload);\n\nlet status = \"NORMAL\";\n\nif (d.temperature > 50 || d.vibration > 3000) {\n    status = \"FAULT\";\n}\nelse if (d.temperature > 40 || d.vibration > 1500) {\n    status = \"WARNING\";\n}\n\nmsg.payload =\n`${d.temperature},${d.humidity},${d.vibration},${d.current},${status}\\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 1060,
+        "wires": [
+            [
+                "1db48b9c81a792bb"
+            ]
+        ]
+    },
+    {
+        "id": "e779938db8b22f5d",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "AI Input",
+        "func": "let d = msg.payload;\n\n// kalau masih string, parse\nif (typeof d === \"string\") {\n    d = JSON.parse(d);\n}\n\nmsg.payload =\n    d.temperature + \" \" +\n    d.humidity + \" \" +\n    d.vibration + \" \" +\n    d.current;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 1140,
+        "wires": [
+            [
+                "75bb5950d275f339"
+            ]
+        ]
+    },
+    {
+        "id": "75bb5950d275f339",
+        "type": "exec",
+        "z": "76fadeb220138296",
+        "command": "python D:\\TubesIoT\\predict.py",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 850,
+        "y": 1140,
+        "wires": [
+            [
+                "22955381c430d413",
+                "fcfb68dae7ea4291",
+                "194f92f4cccc6267"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "0d4a72bb93bd8ba5",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "function 2",
+        "func": "let fault = flow.get('countFault') || 0;\nlet warning = flow.get('countWarning') || 0;\n\nif (fault >= 3) {\n    msg.payload = \"🔴 Immediate Maintenance Required\";\n}\nelse if (warning >= 10) {\n    msg.payload = \"🟠 Schedule Maintenance\";\n}\nelse if (warning >= 5) {\n    msg.payload = \"🟡 Monitor Closely\";\n}\nelse {\n    msg.payload = \"🟢 Normal Operation\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 880,
+        "wires": [
+            [
+                "c02036c42d738222"
+            ]
+        ]
+    },
+    {
+        "id": "c02036c42d738222",
+        "type": "ui_text",
+        "z": "76fadeb220138296",
+        "group": "ad55addac5b7a466",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Recommendation",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1170,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "22955381c430d413",
+        "type": "ui_template",
+        "z": "76fadeb220138296",
+        "group": "ad55addac5b7a466",
+        "name": "",
+        "order": 4,
+        "width": "8",
+        "height": "2",
+        "format": "<div style=\"text-align:center;\">\n    <div ng-style=\"{\n        'color':\n        (msg.payload || '').trim() === 'NORMAL' ? '#00AA00' :\n        (msg.payload || '').trim() === 'WARNING' ? '#FF9800' :\n        '#E53935',\n        'font-size':'42px',\n        'font-weight':'bold'\n    }\">\n        {{msg.payload}}\n    </div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1100,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fcfb68dae7ea4291",
+        "type": "mqtt out",
+        "z": "76fadeb220138296",
+        "name": "",
+        "topic": "alika2026/iot/motor1/ai",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b079dc9948cd9f35",
+        "x": 1140,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "dc06eea75742bf56",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Failure Risk",
+        "func": "let fault = flow.get(\"countFault\") || 0;\nlet warning = flow.get(\"countWarning\") || 0;\nlet prediction = flow.get(\"lastPrediction\") || \"NORMAL\";\n\nlet risk = 0;\n\nif (prediction === \"NORMAL\") risk += 20;\nelse if (prediction === \"WARNING\") risk += 50;\nelse risk += 80;\n\nrisk += warning * 2;\nrisk += fault * 5;\n\nif (risk > 100) risk = 100;\n\nlet level = \"\";\n\nif (risk < 40)\n    level = \"LOW\";\nelse if (risk < 70)\n    level = \"MEDIUM\";\nelse\n    level = \"HIGH\";\n\nmsg.payload = risk + \"% (\" + level + \")\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 800,
+        "wires": [
+            [
+                "3c79b3dd0fc546fc"
+            ]
+        ]
+    },
+    {
+        "id": "194f92f4cccc6267",
+        "type": "function",
+        "z": "76fadeb220138296",
+        "name": "Save Prediction",
+        "func": "flow.set('lastPrediction', msg.payload.trim());\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 1220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3c79b3dd0fc546fc",
+        "type": "ui_text",
+        "z": "76fadeb220138296",
+        "group": "ad55addac5b7a466",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Failure Risk",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1190,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "b079dc9948cd9f35",
+        "type": "mqtt-broker",
+        "name": "Local MQTT",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "aa290a323c2755e0",
+        "type": "ui_group",
+        "name": "Sensor Motor",
+        "tab": "f0077ecbef209e15",
+        "order": 2,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ad55addac5b7a466",
+        "type": "ui_group",
+        "name": "Overview",
+        "tab": "f0077ecbef209e15",
+        "order": 1,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "19a449d55ddcc520",
+        "type": "ui_group",
+        "name": "Monitoring Info",
+        "tab": "f0077ecbef209e15",
+        "order": 4,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f0077ecbef209e15",
+        "type": "ui_tab",
+        "name": "Smart Motor Monitoring",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "dc2b68b8fba92a1c",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
